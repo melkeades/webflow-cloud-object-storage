@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/pages/api/asset.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1763934465747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1763934465747,
+            "name": "Commit-0",
+            "content": "import type { APIRoute } from \"astro\";\nimport { API } from \"../../utils/api\";\n\nexport const GET: APIRoute = async ({ request, locals }) => {\n  API.init((locals.runtime as any).env.ORIGIN);\n\n  try {\n    const url = new URL(request.url);\n    const key = url.searchParams.get(\"key\");\n\n    if (!key) {\n      return API.error(\"Missing key\", request, 400);\n    }\n\n    const bucket = locals.runtime.env.CLOUD_FILES;\n    if (!bucket) {\n      return API.error(\"Cloud storage not configured\", request, 500);\n    }\n\n    const object = await bucket.get(key);\n    if (!object) {\n      return API.error(\"Not found\", request, 404);\n    }\n\n    const data = await object.arrayBuffer();\n    const contentType = object.httpMetadata?.contentType || \"application/octet-stream\";\n\n    return new Response(data, {\n      headers: API.withCorsHeaders(request, {\n        \"Content-Type\": contentType,\n      }),\n    });\n  } catch (error) {\n    console.error(\"Asset retrieval error:\", error);\n    return API.error(\"Failed to retrieve asset\", request, 500);\n  }\n};\n\nexport const OPTIONS: APIRoute = async ({ request, locals }) => {\n  API.init((locals.runtime as any).env.ORIGIN);\n  return API.cors(request);\n};\n"
+        }
+    ]
+}
