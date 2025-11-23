@@ -10,14 +10,16 @@ export const API = {
     "Access-Control-Allow-Origin": "*",
   },
 
-  // Create JSON response with automatic CORS origin handling
-  json: (data: any, request?: Request, status: number = 200) => {
+  // Merge provided headers with CORS defaults and dynamic origin handling
+  withCorsHeaders: (
+    request?: Request,
+    extraHeaders: Record<string, string> = {}
+  ): Record<string, string> => {
     const headers: Record<string, string> = {
-      "Content-Type": "application/json",
       ...API.corsHeaders,
+      ...extraHeaders,
     };
 
-    // Handle dynamic origin if request is provided
     if (request) {
       const origin = request.headers.get("Origin");
       if (origin && API.isAllowedOrigin(origin)) {
@@ -25,9 +27,16 @@ export const API = {
       }
     }
 
+    return headers;
+  },
+
+  // Create JSON response with automatic CORS origin handling
+  json: (data: any, request?: Request, status: number = 200) => {
     return new Response(JSON.stringify(data), {
       status,
-      headers,
+      headers: API.withCorsHeaders(request, {
+        "Content-Type": "application/json",
+      }),
     });
   },
 
@@ -56,10 +65,7 @@ export const API = {
         console.log("CORS check - Allowing origin:", origin);
         return new Response(null, {
           status: 200,
-          headers: {
-            ...API.corsHeaders,
-            "Access-Control-Allow-Origin": origin,
-          },
+          headers: API.withCorsHeaders(request),
         });
       }
     }
@@ -67,7 +73,7 @@ export const API = {
     console.log("CORS check - Using default headers");
     return new Response(null, {
       status: 200,
-      headers: API.corsHeaders,
+      headers: API.withCorsHeaders(),
     });
   },
 
