@@ -3,11 +3,27 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1763934465748,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1763937087579,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n     const options = { limit: 500 };\n     const listed = await bucket.list(options);\n     let truncated = listed.truncated;\n-\n+//\n     // Paging through the files\n     // @ts-ignore\n     let cursor = truncated ? listed.cursor : undefined;\n \n"
+                },
+                {
+                    "date": 1763937126560,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n     const options = { limit: 500 };\n     const listed = await bucket.list(options);\n     let truncated = listed.truncated;\n-//\n+\n     // Paging through the files\n     // @ts-ignore\n     let cursor = truncated ? listed.cursor : undefined;\n \n"
+                },
+                {
+                    "date": 1763937135078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n     const options = { limit: 500 };\n     const listed = await bucket.list(options);\n     let truncated = listed.truncated;\n-\n+//\n     // Paging through the files\n     // @ts-ignore\n     let cursor = truncated ? listed.cursor : undefined;\n \n"
+                },
+                {
+                    "date": 1763937151400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n     const options = { limit: 500 };\n     const listed = await bucket.list(options);\n     let truncated = listed.truncated;\n-//\n+    //\n     // Paging through the files\n     // @ts-ignore\n     let cursor = truncated ? listed.cursor : undefined;\n \n"
                 }
             ],
             "date": 1763934465748,

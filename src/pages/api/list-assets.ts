@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ locals, request }) => {
     const options = { limit: 500 };
     const listed = await bucket.list(options);
     let truncated = listed.truncated;
-
+    //
     // Paging through the files
     // @ts-ignore
     let cursor = truncated ? listed.cursor : undefined;

@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { API } from "../../utils/api";
-
+//
 export const GET: APIRoute = async ({ request, locals }) => {
   API.init((locals.runtime as any).env.ORIGIN);
 
