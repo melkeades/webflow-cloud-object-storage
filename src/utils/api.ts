@@ -1,12 +1,13 @@
 // API Response utilities for consistent handling across endpoints
 export const API = {
   // Allowed origins - always includes localhost for development
-  allowedOrigins: ["http://localhost:4321", "http://localhost:8787"],
+  allowedOrigins: ["https://jscss.webflow.io", "http://localhost:4321", "http://localhost:8787"],
 
   // CORS headers
   corsHeaders: {
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    // "Access-Control-Allow-Origin": "*",
   },
 
   // Create JSON response with automatic CORS origin handling
